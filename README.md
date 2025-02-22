@@ -1,6 +1,6 @@
-# fujinet-render-farm
+# fujinet-compute-farm
 
-Design documents and library code for a multi-machine "render farm" system for Atari 8-bit computers using the FujiNet network device
+Design documents and library code for a multi-machine "compute farm" / "render farm" system for Atari 8-bit computers using the FujiNet network device
 
 ## Concept
 
@@ -19,7 +19,7 @@ The plan is to:
 
 ## What lives where
 
-* Design docs and library will live here in this repo: https://github.com/bvibber/fujinet-render-farm
+* Design docs and library will live here in this repo: https://github.com/bvibber/fujinet-compute-farm
 * Mandelbrot app is on Brooke's forgejo: https://brooke.vibber.net/git/brooke/mandel-6502/
 * prototype server may live separately
 
@@ -28,16 +28,23 @@ The plan is to:
 * a web interface that can view renderings in progress would be neat; this requires being able to describe the image or text data format to the web service for each connected app
 
 ## Proto-design (server)
-- Coordinates/zoom level
-- Map of which scan lines have been run/assigned/are free
-- Bitmap contents for completed scanlines
-- Set of assigned scan lines to run, if not complete
-- push up locally completed scanlines
-- pull down any remotely completed scanlines
-- get any additional assignments for more scanlines
+
+For the Mandelbrot case:
+
+* Input data:
+  * Coordinates/zoom level
+* Work state
+  * Map of which scan lines have been run/assigned/are free
+  * Bitmap contents for completed scanlines
+* Client data
+  * Set of assigned scan lines to run, if not complete
+* During work loop:
+  * Push up locally completed scanlines
+  * Pull down any remotely completed scanlines
+  * get any additional assignments for more scanlines
 
 Currently the client runs in a horiz/vert decimating fashion (4x4, 2x2, then 1x1) so each decimation phase would get a separate run perhaps
 
 ## License
 
-Provisionally selecting MIT-style license, see [LICENSE].
+Provisionally selecting MIT-style license, see `LICENSE`.
